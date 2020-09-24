@@ -7,23 +7,31 @@ def read_file(filename):
     return lines
 
 def convert(lines):
-    new = []
     person = None
     t_count = 0
     b_count = 0
+    t_s_count = 0
+    b_s_count = 0
     for line in lines:
         s = line.split(" ")
         time = s[0]
         name = s[1]
-        if name == "Timothy Huang":
-            print(s[2:])
+        if name == "Timothy":
+            if s[3] == "貼圖":
+                t_s_count += 1
+            else:
+                for m in s[3:]:
+                    t_count += len(m)
         elif name == "ブン":
-            print(s[2:])
-
-
-        #print(s)
-
-    return new
+            if s[2] == "圖片":
+                b_s_count += 1
+            else:
+                for m in s[2:]:
+                    b_count += len(m)
+    print("Timothy Huang說了" , t_count, "個字")
+    print("ブン說了" , b_count, "個字")
+    print("Timothy Huang傳了" , t_s_count, "個貼圖")
+    print("ブン傳了", b_s_count, "個圖片")
 
 def write_file(filename, lines):
 	with open(filename, "w") as f:
